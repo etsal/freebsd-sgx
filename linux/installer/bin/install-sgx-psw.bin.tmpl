@@ -70,10 +70,10 @@ if [ -d "$INSTALL_PATH" ]; then
     exit 4
 fi
 
-PATH=/usr/bin:/bin
+PATH=/usr/local/bin:/usr/bin:/bin
 umask 022
 
-PSWPKG=`mktemp -t sgx-psw-pkg.XXXXXX`
+PSWPKG=`mktemp  sgx-psw-pkg.XXXXXX`
 PSW_TEMP_FOLDER=`mktemp -d /tmp/sgx-psw-XXXXXX`
 trap "rm -fr $PSWPKG $PSW_TEMP_FOLDER= 2>/dev/null; exit 3" HUP INT QUIT TERM
 
@@ -111,8 +111,8 @@ echo " done."
 pushd $PSW_TEMP_FOLDER
 
 source scripts/installConfig
-echo make install `pwd`
-make install
+echo gmake install `pwd`
+gmake install
 
 popd
 

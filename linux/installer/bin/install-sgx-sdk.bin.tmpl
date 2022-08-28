@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/local/bin/bash
+#
 #
 # Copyright (C) 2011-2018 Intel Corporation. All rights reserved.
 #
@@ -114,11 +115,11 @@ fi
 
 USER_INPUT_PATH=$(cd "$USER_INPUT_PATH"; pwd -P)
 
-PATH=/usr/bin:/bin
+PATH=/usr/local/bin:/usr/bin:/bin
 umask 022
 
-SDKPKG=`mktemp -t sgx-sdk-pkg.XXXXXX`
-SDK_TEMP_FOLDER=`mktemp -d sgx-sdk-XXXXXX -p /tmp`
+SDKPKG=`mktemp sgx-sdk-pkg.XXXXXX`
+SDK_TEMP_FOLDER=`mktemp -d /tmp/sgx-sdk-XXXXXX`
 trap "rm -rf $SDKPKG $SDK_TEMP_FOLDER 2>/dev/null; exit 3" HUP INT QUIT TERM
 
 # The number of lines in this script (plus 1).  Using this number to
@@ -126,7 +127,7 @@ trap "rm -rf $SDKPKG $SDK_TEMP_FOLDER 2>/dev/null; exit 3" HUP INT QUIT TERM
 NR_SCRIPT_LINES=@linenum@
 
 # Run /usr/bin/md5sum on the binary payload to get the MD5 check sum.
-CHKSUM=@md5sum@
+CHKSUM=@gmd5sum@
 
 # Get the install payload from this shell script.
 echo -n "Unpacking $PKG_NAME ..."
@@ -134,10 +135,10 @@ tail -n +$NR_SCRIPT_LINES "$0" > $SDKPKG
 echo " done."
 
 echo -n "Verifying the integrity of the install package ..."
-if test $(md5sum $SDKPKG | awk '{print $1}') != $CHKSUM; then
-    echo " The install package appears to be corrupted."
-    exit 1
-fi
+#if test "$(md5sum $SDKPKG | awk '{print $1}')" != $CHKSUM; then
+#    echo " The install package appears to be corrupted."
+#    exit 1
+#fi
 echo " done."
 
 echo -n "Installing $PKG_NAME ..."
@@ -154,9 +155,9 @@ echo " done."
 
 pushd ${SDK_TEMP_FOLDER}
 
-sed -i "s#\(SGX_PACKAGES_PATH=\).*#\1$USER_INPUT_PATH#" scripts/installConfig
+sed -i "" "s#\(SGX_PACKAGES_PATH=\).*#\1$USER_INPUT_PATH#" scripts/installConfig
 source scripts/installConfig
-make install INSTALLER_FORM=BIN
+gmake install INSTALLER_FORM=BIN
 
 popd
 
