@@ -90,7 +90,7 @@ INCLUDE += -I$(SGX_IPP_INC) \
 EDGER8R  := $(LINUX_SDK_DIR)/edger8r/linux/_build/Edger8r.native
 
 
-SQLITECFLAGS := -fpie -Wall -Werror -Wno-uninitialized $(call cc-disable-warning,unused-const-variable)
+SQLITECFLAGS := -fpie -Wall -Wno-uninitialized $(call cc-disable-warning,unused-const-variable)
 ifeq ($(CC_BELOW_4_9), 1)
 	SQLITECFLAGS += -fstack-protector
 else
