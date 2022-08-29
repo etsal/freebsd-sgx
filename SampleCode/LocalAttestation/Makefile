@@ -101,7 +101,7 @@ endif
 App_Cpp_Files := $(wildcard App/*.cpp)
 App_Include_Paths := -I$(SGX_SDK)/include -I$(SGX_SDK)/include/ippcp -I./Include -I./LocalAttestationCode
 
-App_Compile_Flags := $(SGX_COMMON_CFLAGS) -fPIC -Wno-attributes $(App_Include_Paths)
+App_Compile_Flags := $(SGX_COMMON_CFLAGS) -fPIC -Wno-attributes -std=c++11 $(App_Include_Paths)
 # Three configuration modes - Debug, prerelease, release
 #   Debug - Macro DEBUG enabled.
 #   Prerelease - Macro NDEBUG and EDEBUG enabled.

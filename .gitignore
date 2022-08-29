@@ -18,7 +18,7 @@
 /build/
 /linux/installer/bin/*.bin
 
-# download_prebuilt.sh dependencies
+#download_prebuilt.sh dependencies
 Intel\ redistributable\ binary.txt
 Master_EULA_for_Intel_Sw_Development_Products.pdf
 SHA256SUM_prebuilt_2.2.txt
@@ -27,3 +27,7 @@ optimized_libs_2.2.tar.gz
 prebuilt_ae_2.2.tar.gz
 psw/ae/data/prebuilt/PSDA.dalp
 redist.txt
+
+#files generated when compiling the examples
+.config_HW_DEBUG_x64
+app
