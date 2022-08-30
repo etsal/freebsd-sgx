@@ -83,9 +83,9 @@ generate_pkgconfig_files $SGX_VERSION
 cp ${LINUX_INSTALLER_COMMON_DIR}/gen_source/gen_source.py ${SCRIPT_DIR}
 
 # Copy the files according to the BOM
-python ${SCRIPT_DIR}/gen_source.py --bom=BOMs/sdk_base.txt
-python ${SCRIPT_DIR}/gen_source.py --bom=BOMs/sdk_${ARCH}.txt --cleanup=false
-python ${SCRIPT_DIR}/gen_source.py --bom=../licenses/BOM_license.txt --cleanup=false
+python3 ${SCRIPT_DIR}/gen_source.py --bom=BOMs/sdk_base.txt
+python3 ${SCRIPT_DIR}/gen_source.py --bom=BOMs/sdk_${ARCH}.txt --cleanup=false
+python3 ${SCRIPT_DIR}/gen_source.py --bom=../licenses/BOM_license.txt --cleanup=false
 
 # Create the tarball
 pushd ${INSTALL_PATH} &> /dev/null
